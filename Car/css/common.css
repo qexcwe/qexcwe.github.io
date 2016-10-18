@@ -1,0 +1,17 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.clearfix:before,.clearfix:after{
+    content: "";
+    display: table;/*表格模式*/
+
+}
+.clearfix:after{
+    clear: both;
+}
+.clearfix{
+    zoom: 1;/*ie6*/
+}
