@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#lbt{
+				border: solid 1px black;
+				margin: 0 auto;
+				width: 800px;
+				height: 600px;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			#lbt>img{
+				width: 800px;
+				height: 600px;
+				/*position为 absolute的元素定位,相对于上层
+				离自己最近的position不为static的元素*/
+				position: absolute;
+				
+				transition: left 0.5s ease-in-out; 
+				
+			}
+			
+			#pl{
+				position: absolute;
+				height: 50px;
+				width: 100%;
+				bottom: 100px;
+				text-align: center;
+			}
+			
+			.point{
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				border: solid 2px white;
+				border-radius: 50%;
+				cursor: pointer;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="lbt">
+			<img src="images/1.jpg" alt="" />
+			<img src="images/2.jpg" alt="" />
+			<img src="images/3.jpg" alt="" />
+			<img src="images/4.jpg" alt="" />
+			<img src="images/1.jpg" alt="" />
+			
+			<div id="pl">
+				<span class="point"></span>
+				&emsp;
+				<span class="point"></span>
+				&emsp;
+				<span class="point"></span>
+				&emsp;
+				<span class="point"></span>
+			</div>
+			
+		</div>
+	</body>
+	<script>
+		var imgs = document.querySelectorAll("#lbt>img");
+		
+		var points = document.querySelectorAll(".point");
+		
+		points[0].style.backgroundColor = "white";
+		
+		for (var i = 0;i<imgs.length;i++) {
+			imgs[i].style.left = i*800+"px";
+		}
+		
+		//定义一个变量，记录当前显示的图片索引。
+		var currentIndex = 0;
+		
+		
+		//由于定时器触发的自动切换图片和手动点击小白点时切换图片
+		//执行的代码是相同的，所以把这段代码写在函数中，两个地方都
+		//可以调用
+		function moveImage(isAnimate){
+			for (var i = 0;i<imgs.length;i++) {
+				
+				if(currentIndex == 0&&!isAnimate){
+					imgs[i].style.transition = "none";
+					
+				}else{
+					imgs[i].style.transition = "left 0.5s ease-in-out";
+				}
+				
+				imgs[i].style.left = (i-currentIndex)*800+"px";
+			}
+		}
+		
+		
+		function changeImage(){
+			
+			//先把前一个白点变透明
+			points[currentIndex%4].style.backgroundColor = "transparent";
+			
+			currentIndex++;
+			
+			if(currentIndex>4){
+				currentIndex = 0;
+			}
+			
+			//把当前白点变白
+			points[currentIndex%4].style.backgroundColor = "white";
+			
+			moveImage(false);
+			
+			if(currentIndex == 0){
+				timer = setTimeout(changeImage,1400);
+			}else if(currentIndex == 4){
+				timer = setTimeout(changeImage,600);
+			}else{
+				timer = setTimeout(changeImage,2000);
+			}
+			
+		}
+		
+		var timer = setTimeout(changeImage,2000);
+		
+		
+		//给每个小白点添加点击事件监听
+		for (var i = 0;i<points.length;i++) {
+			points[i].dataset.index = i;
+			points[i].onclick = function(){
+				points[currentIndex%4].style.backgroundColor = "transparent";
+				
+				this.style.backgroundColor = "white";
+				//把当前需要显示的图片索引设置为点击的索引
+				currentIndex = this.dataset.index;
+				
+				moveImage(true);
+				
+				//为了手动点击的切换和自动切换不相互影响，点击时
+				//把自动切换停止，再从新开启。
+				clearTimeout(timer);
+				timer = setTimeout(changeImage,2000);
+			}
+		}
+		
+		
+		
+	</script>
+</html>
