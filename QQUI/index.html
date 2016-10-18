@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Caoy">
+    <title>微信</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="SUI/sm.min.css">
+    <style>
+        #btn-title {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        #msg-page, #ab-page, #dynamic-page {
+            transform: none !important;
+        }
+
+    </style>
+</head>
+<body>
+<div class="page-group ">
+    <!--消息界面-->
+    <div class="page page-current" id="msg-page">
+        <!-- 标题栏 -->
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left"></a>
+            <a class="pull-right" style="font-weight: 600;font-size: 1.4rem">
+                ＋
+            </a>
+            <div id="btn-title" class="buttons-row">
+                <a class="tab-link button active">消息</a>
+                <a class="tab-link button">电话</a>
+            </div>
+        </header>
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab">
+            <a class="tab-item active">
+                <span class="icon icon-message"></span>
+                <span class="tab-label">消息</span>
+                <span class="badge">99+</span>
+            </a>
+            <a class="tab-item" href="#ab-page">
+                <span class="icon icon-friends"></span>
+                <span class="tab-label">联系人</span>
+            </a>
+            <a class="tab-item" href="#dynamic-page">
+                <span class="icon icon-star"></span>
+                <span class="tab-label">动态</span>
+            </a>
+        </nav>
+        <!--内容区-->
+        <div class="content">
+            <div class="content-block">
+                这里是消息列表
+            </div>
+        </div>
+    </div>
+
+    <!--联系人页面-->
+    <div class="page" id="ab-page">
+        <!-- 标题栏 -->
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel"></a>
+            <button class="button button-link button-nav pull-right">
+                添加
+            </button>
+            <h1 class="title">联系人</h1>
+        </header>
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab">
+            <a class="tab-item" href="#msg-page">
+                <span class="icon icon-message"></span>
+                <span class="tab-label">消息</span>
+                <span class="badge">99+</span>
+            </a>
+            <a class="tab-item active">
+                <span class="icon icon-friends"></span>
+                <span class="tab-label">联系人</span>
+            </a>
+            <a class="tab-item" href="#dynamic-page">
+                <span class="icon icon-star"></span>
+                <span class="tab-label">动态</span>
+            </a>
+        </nav>
+
+        <!--内容区-->
+        <div class="content">
+            <div class="content-block">
+                这里是联系人页面
+            </div>
+        </div>
+    </div>
+
+    <!--动态页面-->
+    <div class="page" id="dynamic-page">
+        <!-- 标题栏 -->
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel"></a>
+            <button class="button button-link button-nav pull-right">
+                更多
+            </button>
+            <h1 class="title">动态</h1>
+        </header>
+        <!-- 工具栏 -->
+        <nav class="bar bar-tab">
+            <a class="tab-item" href="#msg-page">
+                <span class="icon icon-message"></span>
+                <span class="tab-label">消息</span>
+                <span class="badge">99+</span>
+            </a>
+            <a class="tab-item" href="#ab-page">
+                <span class="icon icon-friends"></span>
+                <span class="tab-label">联系人</span>
+            </a>
+            <a class="tab-item active">
+                <span class="icon  icon-star"></span>
+                <span class="tab-label">动态</span>
+            </a>
+        </nav>
+
+        <!--内容区-->
+        <div class="content">
+            <div class="content-block">
+                这里是动态页面
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-left" id="info-panel">
+        <div class="content-block">
+            <p>这是侧边栏</p>
+        </div>
+    </div>
+</div>
+</body>
+<script type='text/javascript' src='SUI/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='SUI/sm.min.js' charset='utf-8'></script>
+<script>
+
+
+    //    //打开自动初始化页面的功能
+    //    //建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化
+    //    $.config = {
+    //        autoInit: true
+    //    }
+
+    //URL中第一个#后面的字符串四url的哈希值。
+    // hash值不会随请求发送到服务器，
+    // 仅仅是指导浏览器当页面加载完成时显示页面的哪个部分。
+    //window.location.hash可以访问当前页面的hash值，
+    //window.onhashchange事件可以监听hash的变化0.
+
+
+    $(document).on("pageInit", "#msg-page",function (e, pageID, $page) {
+        document.title = "消息";
+
+    });
+    $(document).on("pageInit", "#ab-page",function (e, pageID, $page) {
+        document.title = "联系人";
+    });
+    $(document).on("pageInit", "#dynamic-page",function (e, pageID, $page) {
+        document.title = "动态";
+    });
+
+
+    //初始化SUI
+    $.init();
+</script>
+<html>
